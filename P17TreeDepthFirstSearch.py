@@ -36,8 +36,7 @@ class BinaryTreeNode:
       print((' ' * 4 * level) + '-> ' + str(self.data))
       
       if self.left is not None:
-        self.left.printTree(level + 1)
-
+        self.left.printTree(level + 1)   
 
 class BinaryTree:
     def __init__(self, *args):
@@ -104,30 +103,51 @@ class BinaryTree:
             tree_copy = BinaryTree()
             tree_copy.root = self.get_tree_deep_copy_rec(self.root)
             return tree_copy
-    
-
-
 
 def flatten_tree(root):
     if not root:
         return
-    
+    # Assign current to root
     current = root
+
+    # Traversing the whole tree
+    print("  Traversing the tree\n")
     while current:
 
+        # printing the tree
+        #display_tree(root, current)
+
         if current.left:
+            print("  The current node has a left child\n")
             last = current.left
 
+            # printing the tree
+            #display_tree(root, last)
+
+            # If the last node has right child
             while last.right:
+                print("  The current node has a right child\n")
+                # printing the tree
+                #display_tree(root, last.right)
+
                 last = last.right
             
+            # If the last node does not have right child
+            print("   The current node does not have a right child")
+            print("   We'll merge it with the right subtree")
             last.right = current.right
             current.right = current.left
             current.left = None
 
+            # printing
+            print(".    Our tree now looks like this:\n", end = "")
+            #display_tree(root, current)
+            
+        if current.right:
+            print("  Moving to the right child\n")
         current = current.right
     return root
-  
+
 
 # Driver code
 def main():
@@ -141,6 +161,7 @@ def main():
         [-1, -2, -5, 1, 2, -6]
     ]
     y = 1
+    
     for i in input_trees:
         tree = BinaryTree(i)
         print(y, ". Binary tree:", sep="")

@@ -41,14 +41,26 @@ def merge_intervals(v):
         # Getting and initializing input pair
         cur_start = v[i].start
         cur_end = v[i].end
+        print("\t\t\tCurrent input interval:",
+              "[", cur_start, ",", cur_end, "]")
         # Getting the ending timestamp of the previous interval
         prev_end = last_added_interval.end
+        print("\t\t\tLast output interval:", "[", last_added_interval.start, ",", last_added_interval.end, "]")
         # Overlapping condition
         if prev_end >= cur_start:
             last_added_interval.end = max(cur_end, prev_end)
+            print("\t\t\tOverlapping condition true. Updating last output interval...")
+            print("\t\t\tUpdated last output interval:", "[", last_added_interval.start, ",", last_added_interval.end, "]", "\n")
         # No overlapping
         else:
+            print("\t\t\tOverlapping condition false. Adding input interval to output list...")
             result.append(Interval(cur_start, cur_end))
+        print("\t\t{:<4}{:<10}{:<4}{:<9}{:<4}{:<9}{:<4}{:<12}{:<5}".format( \
+            "|", "cur_start", "|", "cur_end", "|", "prev_end", "|", "Overlapping", "|"))
+        print("\t\t", "-"*54)
+        print("\t\t{:<4}{:<10}{:<4}{:<9}{:<4}{:<9}{:<4}{:<12}{:<5}".format( \
+            "|", cur_start, "|", cur_end, "|", prev_end, "|", bool(prev_end >= cur_start), "|"))
+        print("\n")
     return result
 
 # Printing list of intervals

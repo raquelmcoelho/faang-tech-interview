@@ -31,11 +31,27 @@ def find_max_sliding_window(nums, window_size):
     if window_size > len(nums):
         window_size = len(nums)
     
+    # this variable is for the sole purpose of printing
+    check = False
+
     # Find out first maximum in the first window
+    print("Traversing to find maximum in the first window:")
     for i in range(window_size):
         # For every element, remove the previous smaller elements from window
         while window and nums[i] >= nums[window[-1]]:
+            check = True
+            print(f"\t\tnums[{i}] = {nums[i]} is greater than or equal to nums[window[-1]] = {nums[window[-1]]}")
+            print("\t\tWindow before popping:", window)
             window.pop()
+            print("\t\tWindow after popping:", window)
+
+        # this is only for the purpose of printing
+        if not check:
+            if window:
+                print(f"\t\tnums[{i}] = {nums[i]} is less than nums[window[-1]] = {nums[window[-1]]}")
+            else:
+                print(f"\t\tThe window is empty.")
+        check = False
 
         # Add current element at the back of the queue
         # print(f"\tAppending {i} to the window deque")
@@ -44,12 +60,24 @@ def find_max_sliding_window(nums, window_size):
     # Appending the largest element in the window to the result
     result.append(nums[window[0]])
 
+    print("Traversing to find maximum in remaining windows:")
     for i in range(window_size, len(nums)):
         # remove all numbers that are smaller than current number
         # from the tail of list
         while window and nums[i] >= nums[window[-1]]:
+            check = True
+            print(f"\t\tnums[{i}] = {nums[i]} is greater than or equal to nums[window[-1]] = {nums[window[-1]]}")
             window.pop()
+            print("\t\tWindow after popping:", window)
         
+        # this is only for the purpose of printing
+        if not check:
+            if window:
+                print(f"\t\tnums[{i}] = {nums[i]} is less than nums[window[-1]] = {nums[window[-1]]}")
+            else:
+                print(f"\t\tThe window is empty.")
+        check = False
+
         # Remove first index from the window deque if
         # it doesn't fall in the current window anymore
         if window and window[0] <= (i - window_size):

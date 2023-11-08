@@ -23,7 +23,7 @@ class BinaryTreeNode:
         self.next = None
         self.parent = None
         self.count = 0
-    
+
     ##### adicional ####
     def printTree(self, level=0):
       if self == None:
@@ -230,7 +230,7 @@ def main():
         #display_tree(roots[i])
         if(roots[i] != None):
           roots[i].printTree()
-      
+        
         # Printing the in-order list using the method we just implemented
         print("\n\tLevel order traversal: ", sep = "", end = "")
         print(level_order_traversal(roots[i]))

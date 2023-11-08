@@ -31,15 +31,23 @@ def is_happy_number(n):
         return total_sum
 
     slow_pointer = n  # The slow pointer value
+    print("\tSetting slow pointer = input number", slow_pointer)
+    print("\tSetting fast pointer = square sum of digits of ", n, sep="")
     fast_pointer = sum_digits(n)  # The fast pointer value
+    print("\tFast pointer:", fast_pointer)
     while fast_pointer != 1 and slow_pointer != fast_pointer:  # Terminating condition
+        print("\n\tRepeatedly updating slow and fast pointers\n")
         # Incrementing the slow pointer by 1 iteration
         slow_pointer = sum_digits(slow_pointer)
+        print("\t\tThe updated slow pointer is", slow_pointer, "\n")
         # Incrementing the fast pointer by 2 iterations
         fast_pointer = sum_digits(sum_digits(fast_pointer))
+        print("\t\tThe updated fast pointer is ", fast_pointer, "\n")
     # If 1 is found then it returns True, otherwise False
     if(fast_pointer == 1):
+        print("\tSince fast pointer has converged to 1, the input number is a happy number.\n")
         return True
+    print("\tFast pointer has not converged to 1, the input number is not happy number.\n")
     return False
 
 
